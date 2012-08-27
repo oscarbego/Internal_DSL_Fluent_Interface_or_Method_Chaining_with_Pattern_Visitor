@@ -5,8 +5,15 @@ import os.app.filters.*;
 
 public class RepMP3 implements load, conf, play, stop {
 
+    private final String LOADING = "Cargando archivo: ";
+    private final String PLAYING = "Tocando canción: ";
+    private final String STOPING = "Parando canción: ";
+    private final String PAUSING = "Pausando canción: ";
+
     private static RepMP3 p;
     private actions cmds;
+    private String song;
+    private String status;
     //private RepMP3(){	}
 
     @Override
@@ -59,7 +66,6 @@ public class RepMP3 implements load, conf, play, stop {
         {
             p = new RepMP3();
         }
-        
         return p;
     }
     
@@ -69,19 +75,22 @@ public class RepMP3 implements load, conf, play, stop {
         {
             p = new RepMP3();
         }
-        
+        System.out.println("Preparando reproductor MP3");
         return p;
     }
     
     @Override
     public play load(String mp3) {
-        System.out.println("Se cargo " + mp3);
+        song = mp3;
+        status = LOADING;
+        System.out.println(getStatus());
         return this;
     }
 
     @Override
     public stop play() {
-    	System.out.println("Play");
+        status = PLAYING;
+    	System.out.println(getStatus());
         return this;
     }
     @Override
@@ -102,7 +111,8 @@ public class RepMP3 implements load, conf, play, stop {
     
      @Override
     public void pause(inValue In, byValue By) {
-        
+        status = PAUSING;
+        System.out.println(getStatus());
             Pausa p = new Pausa(In, By);
             
             if (cmds != null) 
@@ -134,6 +144,8 @@ public class RepMP3 implements load, conf, play, stop {
     }
 	
      
-    
+    private String getStatus(){
+        return status + " " + song;
+    }
 }
 
