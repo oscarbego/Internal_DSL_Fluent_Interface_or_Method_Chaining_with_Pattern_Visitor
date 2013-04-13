@@ -20,10 +20,6 @@ public class RepMP3 implements Load, Conf, Play, Stop {
             return name;
         }
     }
-    public enum PositionType {
-        From,
-        To
-    }
 
     private static RepMP3 p;
     private Actions cmds;
@@ -44,8 +40,8 @@ public class RepMP3 implements Load, Conf, Play, Stop {
     public static Position to(int value) {
         return new Position(Position.Type.End, value);
     }
-    public static Position by(int value) {
-        return new Position(Position.Type.End, value);
+    public static int duration(int value) {
+        return value;
     }
     
     
@@ -99,10 +95,10 @@ public class RepMP3 implements Load, Conf, Play, Stop {
     }
     
      @Override
-    public void pause(Position at, Position by) {
+    public void pause(Position at, int duration) {
         status = Status.Paused;
         System.out.println(getStatus());
-            Pausa p = new Pausa(at, by);
+            Pausa p = new Pausa(at, duration);
             
             if (cmds != null) 
                 p.setAction(cmds);       
@@ -116,9 +112,9 @@ public class RepMP3 implements Load, Conf, Play, Stop {
             a.action(this);
         }
         
-        public Pausa (Position in, Position by)
+        public Pausa (Position in, int duration)
         {
-            System.out.println("Pausa en " + in.getValue() + " por " + by.getValue());
+            System.out.println("Pausa en " + in.getValue() + " por " + duration);
         }
         
         public void otroMetodoNS()
