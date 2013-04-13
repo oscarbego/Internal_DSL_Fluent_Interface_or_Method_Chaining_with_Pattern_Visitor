@@ -1,6 +1,5 @@
 package os.app;
 
-import junit.framework.Assert;
 import org.junit.*;
 
 import os.app.RepMP3.Pausa;
@@ -27,7 +26,7 @@ public class MainDSLTest {
   @Test
   public void pruebaDSLConConfiguracionDeObjetoAnonimo(){
     getRepMP3Conf().conf(
-      new actions() {
+      new Actions() {
         @Override
         public void action(Pausa p) {
           System.out.println("Otra accion para la pausa ");

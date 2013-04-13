@@ -11,13 +11,13 @@ public class RepMP3 implements load, conf, play, stop {
     private final String PAUSING = "Pausando canción: ";
 
     private static RepMP3 p;
-    private actions cmds;
+    private Actions cmds;
     private String song;
     private String status;
     //private RepMP3(){	}
 
     @Override
-    public load conf( actions cmds) {
+    public load conf(Actions cmds) {
         this.cmds = cmds;
         return this;
     }
@@ -123,8 +123,8 @@ public class RepMP3 implements load, conf, play, stop {
     public static final class Pausa implements Element {
 
         @Override
-        public void setAction(actions a) {
-            a.action(this); 
+        public void setAction(Actions a) {
+            a.action(this);
         }
         
         public Pausa (inValue In, byValue By)

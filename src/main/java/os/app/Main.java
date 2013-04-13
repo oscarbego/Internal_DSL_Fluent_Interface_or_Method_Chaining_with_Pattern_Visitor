@@ -26,7 +26,7 @@ public class Main {
 		
         getRepMP3Conf().conf(
    
-          new actions() {
+          new Actions() {
               
               @Override
               public void action(Pausa p) {

@@ -3,9 +3,8 @@ package os.app;
 
 import os.app.RepMP3.Pausa;
 //import static os.app.RepMP3.Pausa.otroMetodo;
-import os.app.actions;
 
-public class Commands implements actions
+public class Commands implements Actions
 {
 
     @Override
