@@ -5,15 +5,26 @@ import os.app.filters.*;
 
 public class RepMP3 implements load, conf, play, stop {
 
-    private final String LOADING = "Cargando archivo: ";
-    private final String PLAYING = "Tocando canción: ";
-    private final String STOPING = "Parando canción: ";
-    private final String PAUSING = "Pausando canción: ";
+    enum Status {
+        Loading("Cargando archivo"),
+        Playing("Tocando canción"),
+        Stopped("Detenido"),
+        Paused("En pausa");
+        private String name;
+        Status(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
 
     private static RepMP3 p;
     private Actions cmds;
     private String song;
-    private String status;
+    private Status status;
     //private RepMP3(){	}
 
     @Override
@@ -82,14 +93,14 @@ public class RepMP3 implements load, conf, play, stop {
     @Override
     public play load(String mp3) {
         song = mp3;
-        status = LOADING;
+        status = Status.Loading;
         System.out.println(getStatus());
         return this;
     }
 
     @Override
     public stop play() {
-        status = PLAYING;
+        status = Status.Playing;
     	System.out.println(getStatus());
         return this;
     }
@@ -111,7 +122,7 @@ public class RepMP3 implements load, conf, play, stop {
     
      @Override
     public void pause(inValue In, byValue By) {
-        status = PAUSING;
+        status = Status.Paused;
         System.out.println(getStatus());
             Pausa p = new Pausa(In, By);
             
@@ -145,7 +156,7 @@ public class RepMP3 implements load, conf, play, stop {
 	
      
     private String getStatus(){
-        return status + " " + song;
+        return status + ": " + song;
     }
 }
 
