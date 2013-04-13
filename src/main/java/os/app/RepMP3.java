@@ -5,7 +5,7 @@ import os.app.filters.*;
 
 public class RepMP3 implements Load, Conf, Play, Stop {
 
-    enum Status {
+    public enum Status {
         Loading("Cargando archivo"),
         Playing("Tocando canción"),
         Stopped("Detenido"),
@@ -20,6 +20,10 @@ public class RepMP3 implements Load, Conf, Play, Stop {
             return name;
         }
     }
+    public enum PositionType {
+        From,
+        To
+    }
 
     private static RepMP3 p;
     private Actions cmds;
@@ -33,41 +37,15 @@ public class RepMP3 implements Load, Conf, Play, Stop {
         return this;
     }
 
-    
-    public static final class InValue {
-        final int value;      
-        InValue(int value){
-            this.value = value;
-        }
-        
-        public static void otroMetodo()
-        {
-            System.out.println("otro metodo value");
-        }
-        
-    }
-    public static InValue in(int value) {
-        return new InValue(value);
+    public static Position from(int value) {
+        return new Position(Position.Type.Start, value);
     }
     
-    public static final class ToValue {
-        final int value;      
-        ToValue(int value){
-            this.value = value;
-        }
+    public static Position to(int value) {
+        return new Position(Position.Type.End, value);
     }
-    public static ToValue to(int value) {
-        return new ToValue(value);
-    }
-    
-    public static final class ByValue {
-        final int value;      
-        ByValue(int value){
-            this.value = value;
-        }
-    }
-    public static ByValue by(int value) {
-        return new ByValue(value);
+    public static Position by(int value) {
+        return new Position(Position.Type.End, value);
     }
     
     
@@ -105,26 +83,26 @@ public class RepMP3 implements Load, Conf, Play, Stop {
         return this;
     }
     @Override
-    public Stop play(InValue in) {
-    	System.out.println("Play desde " + in.value);
+    public Stop play(Position from) {
+    	System.out.println("Play desde " + from.getValue());
         return this;
     }  
     @Override
-	public Stop play(InValue in, ToValue to) {
-    	System.out.println("Play desde " + in.value + " hasta " + to.value);
+	public Stop play(Position from, Position to) {
+    	System.out.println("Play desde " + from.getValue() + " hasta " + from.getValue());
 		return this;
 	}
     
     @Override
-    public void stopIn(InValue in) {
-    	System.out.println("Stop in " + in.value );
+    public void stopAt(Position at) {
+    	System.out.println("Stop in " + at.getValue() );
     }
     
      @Override
-    public void pause(InValue in, ByValue by) {
+    public void pause(Position at, Position by) {
         status = Status.Paused;
         System.out.println(getStatus());
-            Pausa p = new Pausa(in, by);
+            Pausa p = new Pausa(at, by);
             
             if (cmds != null) 
                 p.setAction(cmds);       
@@ -138,9 +116,9 @@ public class RepMP3 implements Load, Conf, Play, Stop {
             a.action(this);
         }
         
-        public Pausa (InValue in, ByValue by)
+        public Pausa (Position in, Position by)
         {
-            System.out.println("Pausa en " + in.value + " por " + by.value);
+            System.out.println("Pausa en " + in.getValue() + " por " + by.getValue());
         }
         
         public void otroMetodoNS()

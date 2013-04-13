@@ -1,11 +1,10 @@
 package os.app.filters;
 
-import os.app.RepMP3.InValue;
-import os.app.RepMP3.ToValue;
+import os.app.Position;
 
 public interface Play {
 
     public Stop play();
-    public Stop play(InValue in);
-    public Stop play(InValue in, ToValue to);
+    public Stop play(Position from);
+    public Stop play(Position from, Position to);
 }

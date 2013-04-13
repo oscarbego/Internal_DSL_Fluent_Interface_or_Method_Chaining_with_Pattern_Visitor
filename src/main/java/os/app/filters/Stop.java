@@ -1,8 +1,8 @@
 package os.app.filters;
 
-import os.app.RepMP3;
+import os.app.Position;
 
 public interface Stop {
-    public void stopIn(RepMP3.InValue in);
-    public void pause( RepMP3.InValue in, RepMP3.ByValue By);
+    public void stopAt(Position at);
+    public void pause( Position at, Position by);
 }
