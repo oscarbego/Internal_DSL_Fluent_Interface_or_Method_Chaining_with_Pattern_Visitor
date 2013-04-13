@@ -30,4 +30,16 @@ public class Position {
     public String toString() {
         return "POS[" + (type==Type.Start?"Ini":"Fin") + "]:" + value;
     }
+
+    public static Position from(int value) {
+        return new Position(Position.Type.Start, value);
+    }
+
+    public static Position to(int value) {
+        return new Position(Position.Type.End, value);
+    }
+    public static int duration(int value) {
+        return value;
+    }
+
 }

@@ -33,18 +33,6 @@ public class RepMP3 implements Load, Conf, Play, Stop {
         return this;
     }
 
-    public static Position from(int value) {
-        return new Position(Position.Type.Start, value);
-    }
-    
-    public static Position to(int value) {
-        return new Position(Position.Type.End, value);
-    }
-    public static int duration(int value) {
-        return value;
-    }
-    
-    
     public static Load getRepMP3()
     {
         if(p == null)
@@ -103,32 +91,8 @@ public class RepMP3 implements Load, Conf, Play, Stop {
             if (cmds != null) 
                 p.setAction(cmds);       
     }
-     
-      
-    public static final class Pausa implements Element {
 
-        @Override
-        public void setAction(Actions a) {
-            a.action(this);
-        }
-        
-        public Pausa (Position in, int duration)
-        {
-            System.out.println("Pausa en " + in.getValue() + " por " + duration);
-        }
-        
-        public void otroMetodoNS()
-        {
-            System.out.println("otro metodo");
-        }
-        
-        public static void otroMetodo()
-        {
-            System.out.println("otro metodo pero static");
-        }
-    }
-	
-     
+
     private String getStatus(){
         return status + ": " + song;
     }
