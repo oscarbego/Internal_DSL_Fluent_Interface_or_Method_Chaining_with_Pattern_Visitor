@@ -2,7 +2,7 @@ package os.app.filters;
 
 import os.app.Actions;
 
-public interface conf {
+public interface Conf {
 
-    public load conf(Actions cmds);
+    public Load conf(Actions cmds);
 }

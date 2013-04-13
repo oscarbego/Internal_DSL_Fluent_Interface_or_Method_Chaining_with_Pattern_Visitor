@@ -1,6 +1,6 @@
 package os.app.filters;
 
-public interface load {
+public interface Load {
 
-    public play load(String mp3);   
+    public Play load(String mp3);
 }
